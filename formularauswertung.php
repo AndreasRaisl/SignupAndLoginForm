@@ -139,7 +139,13 @@ session_start();
 
     else 
     {
-			echo "Fehler: Kein query String für action übergeben!";     
+			echo "Fehler: Kein query String für action übergeben!"; 
+			if(isset ($_SESSION['season'])) echo $_SESSION['season'];
+			else
+			{
+				 echo "Sessonvariable ist nicht gesetzt! <br>";
+				 echo "Bitte zunächst <a href='index.php#LoginHeader'> einloggen </a> oder <a href='index.php#RegistrationHeader'> registrieren </a> <br>";
+			}    
 		}
 
 		
