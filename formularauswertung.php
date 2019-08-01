@@ -1,16 +1,14 @@
 <?php
-session_start();	
-    $action = $_GET['action'];
-		$season = $_SESSION['season'];
+session_start();
+	$action = $_GET['action'];
 		
-		if(empty($action)) {
-			// check if user is saved in localstorage, otherwise redirect to the loginpage. 
-		}
-
+	if(empty($action)) {
+		echo "Bitte zunächst <a href='index.php#LoginHeader'> einloggen </a> oder <a href='index.php#RegistrationHeader'> registrieren </a> <br>"; 
+	}
 ?>
 
 <head>
-		<title> interner Bereich </title>
+		<title> Welcome Page </title>
 		<link rel="stylesheet" href="styles/bootstrap.min.css">
 		<link rel="stylesheet" href="styles/processingStyles.css">
 </head>
@@ -29,9 +27,6 @@ session_start();
 			</nav>
     	</div>
   	</header>
-
-
-
 
 
 
@@ -94,7 +89,8 @@ session_start();
 
     // execute if a Login 
     else if($action == "login")
-    {			
+    {	
+
 			$nameFound = false;			
     	$mail = $_POST['email'];
 			$password = $_POST['password'];
@@ -107,11 +103,13 @@ session_start();
 				$userAsArray = explode(';', $user);			
 				if ($userAsArray[3] == $mail) {
 					if($userAsArray[4] == $passwordEnc) {
+						$_SESSION['user'] = $userAsArray[0];
 						echo "Herzlich Willkommen im internen Bereich, " . $userAsArray[0] . "<br>";
 						$time = time();
 						echo date("d.m.Y - H:i:s", $time) . "<br>";
 						echo "Es ist übrigens jetzt "  . $season . "<br>";
-						echo "Hier können interne <a href='#'> Daten </a> angezeigt werden.";					
+						echo "Hier gehts in den  <a href='internalPage.php?context=fromLogin'> internen Bereich </a>  <br>";	
+						echo "<a href='logout.php'> Logout </a> <br>";				
 						$nameFound = true;
 						break;
 					}
