@@ -18,12 +18,15 @@ session_start();
 <body>
 		<header class="container">
 			<div class="row">
-      	<h1 class="col-sm-4">Skillfair</h1>
-      	<nav class="col-sm-8 text-right">
-        	<p>newest</p>
-        	<p>catalogue</p>
-        	<p>contact</p>
-      	</nav>
+			<div class="col-sm-4">
+      	<h1>WebDev</h1>
+				<p> by Andreas Raisl </p>
+			</div>
+			<nav class="col-sm-8 text-right">
+				<p>newest</p>
+				<p>catalogue</p>
+				<p>contact</p>
+			</nav>
     	</div>
   	</header>
 
@@ -56,18 +59,13 @@ session_start();
 			$registrationExpires = strtotime("+30 days");
 			$dateRegistrationExpires = date("d.m.Y", $registrationExpires);
 			$timeRegistrationExpires = date("H:i", $registrationExpires);
-			#$fruits = $_POST['fruits'];		
-			#$favoriteProgrammingLanguage = $_POST['programmingLanguage'];
+			
 
 			if ($_POST['vorname'] == "" or $_POST['nachname'] == "" or $_POST['email'] == "" or $_POST['password'] == "" or $_POST['password-repeat'] == "")
 			{
-				$linkWithQueryString = buildLinkWithQueryString($userName, $firstName, $lastName, $email);
-				//$formUrlWithUserdata = buildFormUrlWithUserdata($existingUserData);
+				$linkWithQueryString = buildLinkWithQueryString($userName, $firstName, $lastName, $email);				
 				echo "Wichtige Felder wurden nicht ausgefüllt. Gehen Sie bitte nochmal zurück zum
-						 <a href='" . $linkWithQueryString . "'> Eingabeformular </a> <br>";
-				//echo "Wichtige Felder wurden nicht ausgefüllt. Gehen Sie bitte nochmal zurück zum
-							//<a href='" . $formUrlWithUserdata . "'> Eingabeformular </a> <br>";	
-							echo $linkWithQueryString;			
+						 <a href='" . $linkWithQueryString . "'> Eingabeformular </a> <br>";										
 			} 
 
 			else if ($passwordMismatch)
