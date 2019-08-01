@@ -45,8 +45,7 @@ session_start();
 			$password = $_POST['password'];
 			$passwordRepeat = $_POST['password-repeat'];
 			$passwordMismatch = false;
-			if($password != $passwordRepeat) $passwordMismatch = true;
-			
+			if($password != $passwordRepeat) $passwordMismatch = true;			
 			$travelDestination = $_POST['traveldestination'];				
 			$pet = $_POST['pet'];
 			if (isset($_POST['isStupid'])) $isStupid = true;
@@ -70,14 +69,9 @@ session_start();
 
 			else if ($passwordMismatch)
 			{
-				$linkWithQueryString = buildLinkWithQueryString($userName, $firstName, $lastName, $email);
-				//$formUrlWithUserdata = buildFormUrlWithUserdata($existingUserData);
-
-				
+				$linkWithQueryString = buildLinkWithQueryString($userName, $firstName, $lastName, $email);				
 				echo "Die beiden Passwörter stimmen nicht überein. Gehen Sie bitte nochmal zurück zum
-						 <a href='" . $linkWithQueryString . "'> Eingabeformular </a> <br>";
-				//echo "Die beiden Passwörter stimmen nicht überein. Gehen Sie bitte nochmal zurück zum
-							//<a href='" . $formUrlWithUserdata . "'> Eingabeformular </a> <br>";
+						 <a href='" . $linkWithQueryString . "'> Eingabeformular </a> <br>";				
 			}
 
 			else 
@@ -93,9 +87,10 @@ session_start();
 				printUserInput($userInput);
 				saveUserToFile($userInputToSave);
 				if ( isset($_FILES['fileUpload']['name']) && $_FILES['fileUpload']['name'] <> "" )	processAndStoreUploadedFile();
-				echo "Es ist übrigens jetzt "  . $season . "<br>";				
+				echo "<br> <br> <br> Es ist übrigens jetzt "  . $season . "<br>";				
 			} 			
 		}
+
 
     // execute if a Login 
     else if($action == "login")
@@ -131,7 +126,7 @@ session_start();
 
 			if ($nameFound == false) {
 				echo "Die Emailadresse wurde nicht gefunden <br>";
-				echo "<a href='formularseite.php'> Zurück zum Login </a>";
+				echo "<a href='index.php'> Zurück zum Login </a>";
 			}
 		} 
 
@@ -159,24 +154,20 @@ function printUserInput($userInput)
 	echo "Ihr liebstes Reiseziel ist: " . $userInput['travelDestination']. "<br>";
 	echo "Sie haben folgendes Haustier angegeben: " . $userInput['pet'] . "<br>";
 	if(!empty ($userInput['isStupid'])) echo "Sie finden diese Fragen ganz schön doof!  <br>";
-	else echo "Sie finden diese Fragen offensichtlich ganz normal <br> ";
-	#for ($i=0; $i<count($userInput['favoriteFruits']); $i++)
-	#{
-		#if ($i < count($userInput['favoriteFruits'])-1)	echo $userInput['favoriteFruits'][$i] . ", ";
-		#else echo $userInput['favoriteFruits'][$i] . "<br> <br>";
-		#}
-		
-		echo "Sie haben sich registriert am " . $userInput['dateOfRegistration'] . " um " . $userInput['timeOfRegistration'] . "<br>";
-		echo "Ihre Registrierung ist 30 Tage gültig, also bis zum " . $userInput['dateRegistrationExpires'] . 
-		" um " . $userInput['timeRegistrationExpires'] . "<br>";
+	else echo "Sie finden diese Fragen offensichtlich ganz normal <br> ";		
+	echo "Sie haben sich registriert am " . $userInput['dateOfRegistration'] . " um " . $userInput['timeOfRegistration'] . "<br>";
+	echo "Ihre Registrierung ist 30 Tage gültig, also bis zum " . $userInput['dateRegistrationExpires'] . 
+	" um " . $userInput['timeRegistrationExpires'] . "<br>";
 }
 
+
 function buildLinkWithQueryString($userName, $firstName, $lastName, $email) {	
-	$linkWithQueryString = 'formularseite.php?userName=' . $userName . '&firstName=' . $firstName . '&lastName=' . $lastName . 
+	$linkWithQueryString = 'index.php?userName=' . $userName . '&firstName=' . $firstName . '&lastName=' . $lastName . 
 	'&email=' . $email;
 	echo $linkWithQueryString . "<br>";
 	return $linkWithQueryString;		
 }
+
 
 function saveUserToFile($userInputToSave)
 {
