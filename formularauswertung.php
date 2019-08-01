@@ -163,8 +163,7 @@ function printUserInput($userInput)
 
 function buildLinkWithQueryString($userName, $firstName, $lastName, $email) {	
 	$linkWithQueryString = 'index.php?userName=' . $userName . '&firstName=' . $firstName . '&lastName=' . $lastName . 
-	'&email=' . $email;
-	echo $linkWithQueryString . "<br>";
+	'&email=' . $email;	
 	return $linkWithQueryString;		
 }
 
@@ -221,6 +220,7 @@ $dateiname = str_replace ("--", "-", $dateiname );
 $dateiname = filter_var($dateiname, FILTER_SANITIZE_URL);
 return ($dateiname);
 }
+
 
 function processAndStoreUploadedFile()
 {
