@@ -1,7 +1,6 @@
 <?php
 session_start();
-	$action = $_GET['action'];
-		
+	$action = $_GET['action'];		
 	if(empty($action)) {
 		echo "Bitte zunächst <a href='index.php#LoginHeader'> einloggen </a> oder <a href='index.php#RegistrationHeader'> registrieren </a> <br>"; 
 	}
@@ -14,46 +13,34 @@ session_start();
 </head>
 
 <body>
-		<header class="container">
-			<div class="row">
-			<div class="col-sm-4">
-      	<h1>WebDev</h1>
-				<p> by Andreas Raisl </p>
-			</div>
-			<nav class="col-sm-8 text-right">
-				<p>newest</p>
-				<p>catalogue</p>
-				<p>contact</p>
-			</nav>
-    	</div>
-  	</header>
 
+<?php
+	include('header.php');	
 
-
-  <?php // execute if a Signup
-    if($action == "register")
-    {
-    	$userName = $_POST['username'];
-			$firstName = $_POST['vorname'];
-			$lastName = $_POST['nachname'];
-			$email = $_POST['email'];
-			$password = $_POST['password'];
-			$passwordRepeat = $_POST['password-repeat'];
-			$passwordMismatch = false;
-			if($password != $passwordRepeat) $passwordMismatch = true;			
-			$travelDestination = $_POST['traveldestination'];				
-			$pet = $_POST['pet'];
-			if (isset($_POST['isStupid'])) $isStupid = true;
-			else $isStupid = false;  
-			$comments = $_POST['comments'];		
-			
-			$timestampOfRegistration = time();
-			$dateOfRegistration = date("d.m.Y", $timestampOfRegistration);
-			$timeOfRegistration = date("H:i", $timestampOfRegistration);
-			$registrationExpires = strtotime("+30 days");
-			$dateRegistrationExpires = date("d.m.Y", $registrationExpires);
-			$timeRegistrationExpires = date("H:i", $registrationExpires);
-			
+  // execute if a Signup
+	if($action == "register")
+	{
+		$userName = $_POST['username'];
+		$firstName = $_POST['vorname'];
+		$lastName = $_POST['nachname'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$passwordRepeat = $_POST['password-repeat'];
+		$passwordMismatch = false;
+		if($password != $passwordRepeat) $passwordMismatch = true;			
+		$travelDestination = $_POST['traveldestination'];				
+		$pet = $_POST['pet'];
+		if (isset($_POST['isStupid'])) $isStupid = true;
+		else $isStupid = false;  
+		$comments = $_POST['comments'];		
+		
+		$timestampOfRegistration = time();
+		$dateOfRegistration = date("d.m.Y", $timestampOfRegistration);
+		$timeOfRegistration = date("H:i", $timestampOfRegistration);
+		$registrationExpires = strtotime("+30 days");
+		$dateRegistrationExpires = date("d.m.Y", $registrationExpires);
+		$timeRegistrationExpires = date("H:i", $registrationExpires);
+		
 
 			if ($_POST['vorname'] == "" or $_POST['nachname'] == "" or $_POST['email'] == "" or $_POST['password'] == "" or $_POST['password-repeat'] == "")
 			{
@@ -82,7 +69,6 @@ session_start();
 				printUserInput($userInput);
 				saveUserToFile($userInputToSave);
 				if ( isset($_FILES['fileUpload']['name']) && $_FILES['fileUpload']['name'] <> "" )	processAndStoreUploadedFile();
-				echo "<br> <br> <br> Es ist übrigens jetzt "  . $season . "<br>";				
 			} 			
 		}
 
@@ -107,7 +93,7 @@ session_start();
 						echo "Herzlich Willkommen im internen Bereich, " . $userAsArray[0] . "<br>";
 						$time = time();
 						echo date("d.m.Y - H:i:s", $time) . "<br>";
-						echo "Es ist übrigens jetzt "  . $season . "<br>";
+						
 						echo "Hier gehts in den  <a href='internalPage.php?context=fromLogin'> internen Bereich </a>  <br>";	
 						echo "<a href='logout.php'> Logout </a> <br>";				
 						$nameFound = true;
@@ -115,7 +101,7 @@ session_start();
 					}
 					else {
 						echo "Das Passwort ist falsch <br>";
-						echo "<a href='formularseite.php'> Zurück zum Login </a>";
+						echo "<a href='index.php#LoginHeader'> Zurück zum Login </a>";
 						$nameFound = true;
 						break;
 					}
@@ -124,26 +110,21 @@ session_start();
 
 			if ($nameFound == false) {
 				echo "Die Emailadresse wurde nicht gefunden <br>";
-				echo "<a href='index.php'> Zurück zum Login </a>";
+				echo "<a href='index.php#LoginHeader'> Zurück zum Login </a>";
 			}
 		} 
 
     
 
-    else if ($action == 'showData')
-    {
-    	echo "Here I am outputting requested data";
-    }
+    // else if ($action == 'showData')
+    // {
+    // 	echo "Here I am outputting requested data";
+    // }
 
     else 
     {
-			echo "Fehler: Kein query String für action übergeben!"; 
-			if(isset ($_SESSION['season'])) echo $_SESSION['season'];
-			else
-			{
-				 echo "Sessonvariable ist nicht gesetzt! <br>";
-				 echo "Bitte zunächst <a href='index.php#LoginHeader'> einloggen </a> oder <a href='index.php#RegistrationHeader'> registrieren </a> <br>";
-			}    
+			echo "Fehler: Kein query String für action übergeben!";			
+			echo "Bitte zunächst <a href='index.php#LoginHeader'> einloggen </a> oder <a href='index.php#RegistrationHeader'> registrieren </a> <br>";
 		}
 
 		
@@ -164,25 +145,22 @@ function printUserInput($userInput)
 	" um " . $userInput['timeRegistrationExpires'] . "<br>";
 }
 
-
+// takes in already entered user data as strings and returns a linktext (string) for a href parameter pointing back to the Sign In Form 
+//with an attached query string of the already entered user data 
 function buildLinkWithQueryString($userName, $firstName, $lastName, $email) {	
 	$linkWithQueryString = 'index.php?userName=' . $userName . '&firstName=' . $firstName . '&lastName=' . $lastName . 
 	'&email=' . $email;	
 	return $linkWithQueryString;		
 }
 
-
 function saveUserToFile($userInputToSave)
-{
-	// $recordAsArray = array($userInput['userName'], $userInput['firstName'], $userInput['lastName'],
-	//  $userInput['email'], $userInput['passwordEnc'], "dummyString");
-	 $userInputToSave = $userInputToSave;
-
+{	
 	$userInputToSave  = implode(';', $userInputToSave) . ";dummyString\n";
 	file_put_contents('Data/users.txt', $userInputToSave, FILE_APPEND);
 	echo "Der Nutzerdatei hinzugefügt <br> ";
 }
 
+// changes the filename to a robust version 
 function standardizeFileName($dateiname)
 {
 	// habe ich kopiert aus ".....", alle weiteren Codezeilen einschliesslich der Kommentare von dort //übernommen
@@ -225,10 +203,13 @@ $dateiname = filter_var($dateiname, FILTER_SANITIZE_URL);
 return ($dateiname);
 }
 
-
+// stores a file that the user might have uploaded
 function processAndStoreUploadedFile()
 {
 	$allowedFileTypes = array("image/png", "image/jpeg", "image/gif", "text/plain", "application/pdf");
+	$allowedExtensions = array('jpg', 'jpeg', 'png', 'gif', 'pdf');
+	
+	
 	if(in_array($_FILES['fileUpload']['type'], $allowedFileTypes))
     {
     	$dateiname = standardizeFileName($_FILES['fileUpload']['name']);
@@ -239,8 +220,7 @@ function processAndStoreUploadedFile()
     	echo "<a href='uploadedFiles/" . $_FILES['fileUpload']['name'] . "'> uploadedFiles/" . $_FILES['fileUpload']['name'] . " </a> <br> <br>";
 	}
 	else echo "Ungültiger Dateityp";	
-}
-	
+}	
 ?>
 
 </body>

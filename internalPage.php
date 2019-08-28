@@ -7,3 +7,10 @@ if(!isset($_SESSION['user'])) {
 $user = $_SESSION['user'];
 
 $context = $_GET['context'];
+
+if(isset($context) and $context == "fromLogin") {
+  echo "Herzlich Willkommen, " . $user;
+}
+else {
+  echo "Herzlich Willkommen zurück, " . $user;
+}

@@ -34,11 +34,6 @@
 </head>
 
 <body>
-<?php
-	session_start();
-	$_SESSION['season'] = "Sommer";
-	
-?>
 
 <div class='menu-container'>
 	<div class='menu'>
