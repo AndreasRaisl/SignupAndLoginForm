@@ -25,7 +25,7 @@
 <html>
   <head>
     <title> Calculate Birthday </title>
-    <link rel="stylesheet" href="stylesForResult.css">
+    <link rel="stylesheet" href="styles/stylesForResult.css">
   </head>
 
   <body> 
