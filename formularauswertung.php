@@ -32,17 +32,16 @@ session_start();
 		$pet = $_POST['pet'];
 		if (isset($_POST['isStupid'])) $isStupid = true;
 		else $isStupid = false;  
-		$comments = $_POST['comments'];		
+		$comments = $_POST['comments'];			
 		
-		$timestampOfRegistration = time();
-		$dateOfRegistration = date("d.m.Y", $timestampOfRegistration);
-		$timeOfRegistration = date("H:i", $timestampOfRegistration);
+		$dateOfRegistration = date("d.m.Y");
+		$timeOfRegistration = date("H:i:s");
 		$registrationExpires = strtotime("+30 days");
 		$dateRegistrationExpires = date("d.m.Y", $registrationExpires);
 		$timeRegistrationExpires = date("H:i", $registrationExpires);
 		
 
-			if ($_POST['vorname'] == "" or $_POST['nachname'] == "" or $_POST['email'] == "" or $_POST['password'] == "" or $_POST['password-repeat'] == "")
+			if ($firstName == "" or $lastName == "" or $email == "" or $password == "" or $passwordRepeat == "")
 			{
 				$linkWithQueryString = buildLinkWithQueryString($userName, $firstName, $lastName, $email);				
 				echo "Wichtige Felder wurden nicht ausgefüllt. Gehen Sie bitte nochmal zurück zum
@@ -89,14 +88,14 @@ session_start();
 				$userAsArray = explode(';', $user);			
 				if ($userAsArray[3] == $mail) {
 					if($userAsArray[4] == $passwordEnc) {
+						$nameFound = true;
 						$_SESSION['user'] = $userAsArray[0];
-						echo "Herzlich Willkommen im internen Bereich, " . $userAsArray[0] . "<br>";
-						$time = time();
-						echo date("d.m.Y - H:i:s", $time) . "<br>";
+
+						echo "Herzlich Willkommen im internen Bereich, " . $userAsArray[0] . "<br>";						
+						echo date("d.m.Y - H:i:s", time()) . "<br>";
 						
 						echo "Hier gehts in den  <a href='internalPage.php?context=fromLogin'> internen Bereich </a>  <br>";	
-						echo "<a href='logout.php'> Logout </a> <br>";				
-						$nameFound = true;
+						echo "<a href='logout.php'> Logout </a> <br>";							
 						break;
 					}
 					else {
@@ -112,14 +111,7 @@ session_start();
 				echo "Die Emailadresse wurde nicht gefunden <br>";
 				echo "<a href='index.php#LoginHeader'> Zurück zum Login </a>";
 			}
-		} 
-
-    
-
-    // else if ($action == 'showData')
-    // {
-    // 	echo "Here I am outputting requested data";
-    // }
+		}      
 
     else 
     {
@@ -156,6 +148,11 @@ function buildLinkWithQueryString($userName, $firstName, $lastName, $email) {
 function saveUserToFile($userInputToSave)
 {	
 	$userInputToSave  = implode(';', $userInputToSave) . ";dummyString\n";
+	//if (IsMailRegistered($userInputToSave)) {
+	// 	echo "Diese Mailadresse ist bereits registriert. Kein neuer Datensatz der Nutzerdatei hinzugefügt. <br>
+	// 	      Bitte melden Sie sich mit dem bestehenden Passwort an oder registrieren Sie eine neue Emailadresse <br>";
+	// }
+	
 	file_put_contents('Data/users.txt', $userInputToSave, FILE_APPEND);
 	echo "Der Nutzerdatei hinzugefügt <br> ";
 }
