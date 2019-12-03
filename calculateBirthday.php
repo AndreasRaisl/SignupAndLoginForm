@@ -10,7 +10,8 @@
   $birthdayYear = $_POST['birthdayYear'];
   $birthdayString = "$birthdayDay.$birthdayMonth.$birthdayYear";
   $birthdayTimestamp = strtotime($birthdayString)."<br />";
-  $birthdayWeekday = strftime("%A", $birthdayTimestamp);    
+  $birthdayWeekday = strftime("%A", $birthdayTimestamp); 
+  $wochentagGeburt = translateWeekdayToGerman($birthdayWeekday);   
   
   $handle=fopen("besucherzaehler.txt", "r");
   $visitorsBefore=fread($handle, filesize("besucherzaehler.txt"));
@@ -18,7 +19,11 @@
   $visitorsNow = $visitorsBefore+1;    
   $handle=fopen("besucherzaehler.txt","w");
   fwrite($handle, $visitorsNow);
-  fclose($handle);  
+  fclose($handle); 
+  
+  function translateWeekdayToGerman($weekday) {
+    return $weekday;
+  }
 ?>
 
 
