@@ -47,9 +47,9 @@
 
 <header class='header-container' id='RegistrationHeader'>
 	<div class='header'>
-		<div class='subscribe'>Subscribe &#9662;</div> 
+		<div> Placeholder</div> 
 		<h1 class="pagetitle"> Registrierung </h1> 
-		<div class='social'><img src='images/social-icons.svg'/></div>
+		<div> Placeholder </div>
 	</div>
 </header>
 
@@ -76,6 +76,17 @@
 		<div class="form-row">
 			<label for="email"> Ihre Email Adresse </label>
 			<input name="email" id="email" type="email" value="<?php echo @$_GET['email']; ?>">
+		</div>
+
+		<div class='form-row'>
+			<label class='checkbox-label' for='confirmByMail'>
+				<input id='confirmByMail' name='confirmByMail' type='checkbox' value='confirmByMail'/>
+				<span> Bestätigung per Email bekommen </span>
+			</label>
+		</div>
+
+		<div class='form-row'>
+			Bla bla bla  hier kommt der lange Erklärungstext. 
 		</div>
 
 		<div class="form-row">
