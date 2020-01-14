@@ -15,7 +15,7 @@ session_start();
 <body>
 
 <?php
-	include('header.php');	
+		
 
   // execute if a Signup
 	if($action == "register")
@@ -217,7 +217,9 @@ function processAndStoreUploadedFile()
     	echo "<a href='uploadedFiles/" . $_FILES['fileUpload']['name'] . "'> uploadedFiles/" . $_FILES['fileUpload']['name'] . " </a> <br> <br>";
 	}
 	else echo "Ungültiger Dateityp";	
-}	
+}
+
+include('footer.php');
 ?>
 
 </body>

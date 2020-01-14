@@ -4,59 +4,30 @@
 	<title> Formularseite </title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="styles/formStyles.css">
-	<script>
-		function checkPasswordQuality(password)
-		{
-			if (password == "")
-			{
-				document.getElementById("SafetyInfo").innerHTML = "Keine Passworteingabe";
-				return;
-			}	
-			if (window.XMLHttpRequest)
-			{
-				xmlhttp = new XMLHttpRequest();
-			}
-			else
-			{
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange=function()
-			{
-				if (xmlhttp.readyState==4 && xmlhttp.status==200)
-				{
-					document.getElementById("SafetyInfo").innerHTML = xmlhttp.responseText;
-				}
-			}
-			xmlhttp.open("GET", "kennworttesten.php?q="+password, true);
-			xmlhttp.send();
-		}		
-	</script>
+	<script src="js/checkPasswordQuality.js">	</script>
 </head>
 
 <body>
-
-<div class='menu-container'>
-	<div class='menu'>
-		<div class='date'> <?php echo showDateGerman(); ?> </div>
-		<div class="signupandlogin">
-			<div class='signup'> <a href="#RegistrationHeader">Sign Up</a></div>
-			<div class='login'> <a href="#LoginHeader">Login</a> </div>
-	  </div>
+	<div class='menu-container'>
+		<div class='menu'>
+			<div class='date'> <?php echo showDateGerman(); ?> </div>
+			<div class="signupandlogin">
+				<div class='signup'> <a href="#RegistrationHeader">Sign Up</a></div>
+				<div class='login'> <a href="#LoginHeader">Login</a> </div>
+			</div>
+		</div>
 	</div>
-</div>
 
-<header class='header-container' id='RegistrationHeader'>
-	<div class='header'>
-		<div> Placeholder</div> 
-		<h1 class="pagetitle"> Registrierung </h1> 
-		<div> Placeholder </div>
-	</div>
-</header>
+	<header class='header-container' id='RegistrationHeader'>
+		<div class='header'>		 
+			<h1 class="pagetitle"> Registrierung </h1> 			
+		</div>
+	</header>
 
 <div class="registration-container">
 	<div class="register">
 
-		<h2> Registration </h2>
+		<h2> Registrierung </h2>
 		<form action="formularauswertung.php?action=register" method="post" enctype="multipart/form-data" name="regForm" id="regForm">
 		<div class="form-row">
 			<label for="username"> Ihr Username zum Einloggen </label>
@@ -86,13 +57,14 @@
 		</div>
 
 		<div class='form-row'>
-			Bla bla bla  hier kommt der lange Erklärungstext. 
+			Emailversand ist im Code implementiert, funktioniert aber derzeit nicht über den Heroku-Server auf dem diese Seite gehostet ist. Tragen Sie daher bedenkenlos Ihre echte oder auch eine Fake-Email ein.
+			<br> <br> 
 		</div>
 
 		<div class="form-row">
 			<label for="password"> Ihr Passwort </label>
 			<input type="password"  id="password" name="password" onkeyup="checkPasswordQuality(this.value)">
-			<span id="SafetyInfo"> Safety-Check for password </span>
+			<span id="SafetyInfo">  </span>
 		</div>
 
 		<div class="form-row">

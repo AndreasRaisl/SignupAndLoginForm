@@ -37,11 +37,11 @@ if (preg_match("/[,.;:_]/", $password)) {
  
 if($sicherheitszahl < 18)
 {	
-	echo 'unsicher (' . $sicherheitszahl . ' Punkte)' . $debug_kleinbuchstabe . $debug_grossbuchstabe . $debug_zahl . $debug_zeichen;
+	echo 'unsicher';/* . $sicherheitszahl . ' Punkte)' . $debug_kleinbuchstabe . $debug_grossbuchstabe . $debug_zahl . $debug_zeichen; */
 }
 elseif($sicherheitszahl <= 25)
-	echo 'sicher (' . $sicherheitszahl . ' Punkte)' . $debug_kleinbuchstabe . $debug_grossbuchstabe . $debug_zahl . $debug_zeichen;
+	echo 'sicher'; /* (' . $sicherheitszahl . ' Punkte)' . $debug_kleinbuchstabe . $debug_grossbuchstabe . $debug_zahl . $debug_zeichen; */
 elseif($sicherheitszahl > 25)
-	echo 'sehr sicher (' . $sicherheitszahl . ' Punkte)'  . $debug_kleinbuchstabe . $debug_grossbuchstabe . $debug_zahl . $debug_zeichen;
+	echo 'sehr sicher'; /* (' . $sicherheitszahl . ' Punkte)'  . $debug_kleinbuchstabe . $debug_grossbuchstabe . $debug_zahl . $debug_zeichen; */
 
 ?>

@@ -1,0 +1,4 @@
+Daniel;Daniel;Raisl;dani.raisl@gmx.de;d9bf9e2968f9d1b34db22e7bac2f2f1fe5101e4a;dummyString
+Andy;Andreas;Raisl;andreas.raisl@gmx.de;30ced51b32f5ed2534bc895966e394c73fee1877;dummyString
+Halja;Halyna;Oliyarnyk;halja@web.de;3f547476e0ce8e681ded188f0322a4d5e0d56ec4;dummyString
+Franky;Frank;Rustige;franky@yahoo.com;c22373b83994430b5f2e8428c71abdc683bf373a;dummyString
